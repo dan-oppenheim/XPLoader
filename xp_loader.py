@@ -1,4 +1,5 @@
-import libtcodpy as libtcod
+import tcod as libtcod
+import binascii
 
 ##################################
 # In-memory XP format is as follows:
@@ -118,8 +119,8 @@ def load_xp_string(file_string, reverse_endian=True):
 		layer_count = layer_count[::-1]
 
 	# hex-encodes the numbers then converts them to an int
-	version = int(version.encode('hex'), 16)
-	layer_count = int(layer_count.encode('hex'), 16)
+	version = int(binascii.hexlify(version), 16)
+	layer_count = int(binascii.hexlify(layer_count), 16)
 
 	layers = []
 
@@ -136,8 +137,8 @@ def load_xp_string(file_string, reverse_endian=True):
 			this_layer_width = this_layer_width[::-1]
 			this_layer_height = this_layer_height[::-1]
 
-		this_layer_width = int(this_layer_width.encode('hex'), 16)
-		this_layer_height = int(this_layer_height.encode('hex'), 16)
+		this_layer_width = int(binascii.hexlify(this_layer_width), 16)
+		this_layer_height = int(binascii.hexlify(this_layer_height), 16)
 
 		current_largest_width = max(current_largest_width, this_layer_width)
 		current_largest_height = max(current_largest_height, this_layer_height)
@@ -174,8 +175,8 @@ def parse_layer(layer_string, reverse_endian=True):
 		width = width[::-1]
 		height = height[::-1]
 
-	width = int(width.encode('hex'), 16)
-	height = int(height.encode('hex'), 16)
+	width = int(binascii.hexlify(width), 16)
+	height = int(binascii.hexlify(height), 16)
 
 	cells = []
 	for x in range(width):
@@ -205,21 +206,21 @@ def parse_individual_cell(cell_string, reverse_endian=True):
 	keycode = cell_string[offset:offset + layer_keycode_bytes]
 	if reverse_endian:
 		keycode = keycode[::-1]
-	keycode = int(keycode.encode('hex'), 16)
+	keycode = int(binascii.hexlify(keycode), 16)
 	offset += layer_keycode_bytes
 
-	fore_r = int(cell_string[offset:offset+1].encode('hex'), 16)
+	fore_r = int(binascii.hexlify(cell_string[offset:offset+1]), 16)
 	offset += 1
-	fore_g = int(cell_string[offset:offset+1].encode('hex'), 16)
+	fore_g = int(binascii.hexlify(cell_string[offset:offset+1]), 16)
 	offset += 1
-	fore_b = int(cell_string[offset:offset+1].encode('hex'), 16)
+	fore_b = int(binascii.hexlify(cell_string[offset:offset+1]), 16)
 	offset += 1
 
-	back_r = int(cell_string[offset:offset+1].encode('hex'), 16)
+	back_r = int(binascii.hexlify(cell_string[offset:offset+1]), 16)
 	offset += 1
-	back_g = int(cell_string[offset:offset+1].encode('hex'), 16)
+	back_g = int(binascii.hexlify(cell_string[offset:offset+1]), 16)
 	offset += 1
-	back_b = int(cell_string[offset:offset+1].encode('hex'), 16)
+	back_b = int(binascii.hexlify(cell_string[offset:offset+1]), 16)
 	offset += 1
 
 	return {

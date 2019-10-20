@@ -1,4 +1,4 @@
-import libtcodpy as libtcod
+import tcod as libtcod
 import xp_loader
 import gzip
 

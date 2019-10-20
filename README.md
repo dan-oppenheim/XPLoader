@@ -10,6 +10,9 @@ Just demonstrates loading a simple .xp file with layers. esc quits, a toggles di
 
 Copy xp\_loader.py into your project, import xp\_loader, and call load\_xp\_string. Note: By default, .xp files are gzipped, and you'll need to use the gzip library to decompress them first. The code's fairly readable if you want to look at it, and I tried to comment things that aren't obvious. load\_layer\_to\_console makes it easier to load the data into libtcod consoles (root or otherwise). Have fun!
 
+# Dependencies
+[tcod](https://python-tcod.readthedocs.io/en/latest/index.html)
+
 # links
 
 [Screenshot](http://prntscr.com/8c96vo)
