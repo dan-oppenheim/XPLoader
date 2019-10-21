@@ -1,4 +1,8 @@
-import tcod as libtcod
+from sys import platform
+if platform == 'darwin':
+	import tcod as libtcod
+else:
+	import libtcodpy as libtcod
 import binascii
 
 ##################################
